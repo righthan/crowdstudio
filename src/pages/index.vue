@@ -13,13 +13,7 @@
             <rank-message-special/>
           </v-col>
           <v-col cols="4">
-            <v-card
-              class="pa-2"
-              tile
-              style="height: 300px;"
-            >
-              STATUS
-            </v-card>
+            <status/>
           </v-col>
           <v-col cols="4">
             <v-card
@@ -48,6 +42,7 @@ import LiveStream from '../components/LiveStream.vue'
 import SendMessage from '../components/SendMessage.vue'
 import ChatStream from '../components/ChatStream.vue'
 import RankMessageSpecial from '../components/RankMessageSpecial.vue'
+import Status from '../components/Status.vue'
 
 export default {
   name: 'Index',
@@ -56,6 +51,7 @@ export default {
     SendMessage,
     ChatStream,
     RankMessageSpecial,
+    Status,
   },
 
   data: () => ({
