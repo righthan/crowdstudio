@@ -19,7 +19,7 @@
           <v-icon>
             mdi-account
           </v-icon>
-          1,000 viewers
+          {{view_count}} viewers
         </span>
       </v-col>
     </v-row>
@@ -28,7 +28,16 @@
 
 <script>
 export default {
-  name: 'LiveStream'
+  name: 'LiveStream',
+  props: ["socket"],
+  data: () => ({
+    view_count: 0
+  }),
+  mount() {
+    this.socket.on("view count update", count => {
+      this.view_count = count
+    })
+  }
 }
 </script>
 

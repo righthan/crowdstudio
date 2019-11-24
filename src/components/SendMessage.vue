@@ -16,5 +16,13 @@
 <script>
 export default {
   name: 'SendMessage',
+  props: ["socket"],
+  methods: {
+    sendMessage: function(event) {
+      event
+      // send message to message variable
+      this.socket.emit("message", false)
+    }
+  }
 }
 </script>

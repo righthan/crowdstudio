@@ -10,21 +10,21 @@
         >
           <v-col cols="9">
 
-            <live-stream />
+            <live-stream :socket="socket"/>
             <v-row>
               <v-col cols="6">
-                <rank-message-special/>
+                <rank-message-special :socket="socket"/>
               </v-col>
               <v-col cols="6">
                 <status/>
               </v-col>
             </v-row>
-
+          {{test}}
           </v-col>
 
           <v-col cols="3">
-            <chat-stream/>
-            <send-message/>
+            <chat-stream :socket="socket"/>
+            <send-message :socket="socket"/>
           </v-col>
 
         </v-row>
@@ -41,6 +41,8 @@ import SendMessage from '../components/SendMessage.vue'
 import ChatStream from '../components/ChatStream.vue'
 import RankMessageSpecial from '../components/RankMessageSpecial.vue'
 
+import io from 'socket.io-client';
+
 export default {
   name: 'Index',
   components: {
@@ -51,9 +53,13 @@ export default {
     RankMessageSpecial,
     Status,
   },
-
   data: () => ({
-    //
+    socket: io('localhost:3001')
   }),
+  mounted() {
+    let urlParams = new URLSearchParams(window.location.search);
+    let userID = urlParams.get('userID');
+    this.socket.emit("register", userID);
+  },
 };
 </script>

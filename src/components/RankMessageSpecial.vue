@@ -56,11 +56,18 @@
 <script>
 export default {
   name: 'RankMessageSpecial',
+  props: ["socket"],
   data: () => ({
     rankList: [
       {text: 'header1', rank: '1', likeBool: 'False'},
       {text: 'header2', rank: '2', likeBool: 'False'}
     ]
   }),
+  mount() {
+    this.socket.on("rank list update", (list) => {
+      // update rank list
+      list
+    })
+  }
 }
 </script>

@@ -21,9 +21,16 @@ import MessageSpecial from './MessageSpecial.vue'
 
 export default {
   name: 'ChatStream',
+  props: ["socket"],
   components: {
     MessageNormal,
     MessageSpecial,
+  },
+  mount() {
+    this.socket.on("message", (msg) => {
+      msg
+      // display message
+    })
   }
 }
 </script>
