@@ -12,8 +12,12 @@
             <div class="my-2 pr-2">
               <h1 class="purple--text"> 1 </h1>
             </div>
-            <div class="my-2 px-0 pr-1" style="width: 250px;">
-              <v-btn text block outlined color="purple">{{rankList[0].text}}</v-btn>
+            <div class="my-2 px-0 pr-1" style="width: 400px;">
+              <v-flex>
+                  <v-card color="#F3E5F5" style="width: 400px;">
+                    <v-card-text>{{rankList[0].text}}</v-card-text>
+                  </v-card>
+              </v-flex>
             </div>
             <v-btn text icon color="deep-purple">
               <v-icon>mdi-thumb-up</v-icon>
@@ -26,8 +30,12 @@
             <div class="my-2 pr-3">
               <h2 class="purple--text"> 2 </h2>
             </div>
-            <div class="my-2 px-0 pr-1" style="width: 250px;">
-              <v-btn text block outlined color="purple">Second</v-btn>
+            <div class="my-2 px-0 pr-1" style="width: 400px;">
+              <v-flex>
+                  <v-card color="#F3E5F5" style="width: 400px;">
+                    <v-card-text>What</v-card-text>
+                  </v-card>
+              </v-flex>
             </div>
             <v-btn text icon color="deep-purple">
               <v-icon>mdi-thumb-up</v-icon>
@@ -40,8 +48,12 @@
             <div class="my-2 pr-4">
               <h3 class="purple--text"> 3 </h3>
             </div>
-            <div class="my-2 px-0 pr-1" style="width: 250px;">
-              <v-btn text block outlined color="purple"> Third</v-btn>
+            <div class="my-2 px-0 pr-1" style="width: 400px;">
+              <v-flex>
+                  <v-card color="#F3E5F5" style="width: 400px;">
+                    <v-card-text>What</v-card-text>
+                  </v-card>
+              </v-flex>
             </div>
             <v-btn text icon color="deep-purple">
               <v-icon>mdi-thumb-up</v-icon>
