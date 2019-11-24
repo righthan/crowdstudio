@@ -4,7 +4,7 @@
         tile
         style="height: 300px;"
     >
-        Your Current Message
+        Message Status
     <v-divider :inset="inset"></v-divider>
         <v-container>
             <v-layout row justify-space-around mt-12 mb-12 align-center>
