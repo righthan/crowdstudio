@@ -7,22 +7,20 @@
         Message Status
     <v-divider :inset="inset"></v-divider>
         <v-container>
-            <v-layout row justify-space-around mt-12 mb-12 align-center>
-                <v-flex md2 l2 xl2>
+            <v-row class="mt-8 mb-8 ml-1">
+                <v-col cols="2">
                     <div class="text-center title grey--text">{{message.rank}}</div>
                     <div class="text-center"><v-icon large justify-center color="purple">{{message.arrow}}</v-icon></div>
 
-                </v-flex>
-                <v-flex md9 l9 xl9>
+                </v-col>
+                <v-col cols="9">
                     <v-card color="#F3E5F5"><v-card-text>{{message.content}}</v-card-text></v-card>
 
-                </v-flex>
-            </v-layout>
-            <v-layout row justify-center align-center>
-                <v-flex xs5 s5 md-auto>
+                </v-col>
+            </v-row>
+            <v-row justify="center">
                     <v-btn class="white--text" color="red">Delete<v-icon right>mdi-delete</v-icon></v-btn>
-                </v-flex>
-            </v-layout>
+            </v-row>
         </v-container>
     
     </v-card>
