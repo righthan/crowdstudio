@@ -5,6 +5,7 @@
     style="height: 300px;"
   >
     Ranks
+     <v-divider :inset="inset"></v-divider>
     
       <v-col class="text-center">
         <div class="my-2 px-0">
