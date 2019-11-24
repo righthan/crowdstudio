@@ -1,4 +1,4 @@
-<template>
+<template id="SpecialMessageRanks">
   <v-card
     class="pa-2 text-center title"
     tile
@@ -13,7 +13,7 @@
               <h1 class="purple--text"> 1 </h1>
             </div>
             <div class="my-2 px-0 pr-1" style="width: 250px;">
-              <v-btn text block outlined color="purple">First</v-btn>
+              <v-btn text block outlined color="purple">{{rankList[0].text}}</v-btn>
             </div>
             <v-btn text icon color="deep-purple">
               <v-icon>mdi-thumb-up</v-icon>
@@ -56,5 +56,11 @@
 <script>
 export default {
   name: 'RankMessageSpecial',
+  data: () => ({
+    rankList: [
+      {text: 'header1', rank: '1', likeBool: 'False'},
+      {text: 'header2', rank: '2', likeBool: 'False'}
+    ]
+  }),
 }
 </script>
