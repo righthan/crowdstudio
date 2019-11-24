@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-<template>
-  <v-card
-    class="pa-2"
-    tile
-    style="height: 300px;"
-  >
-    RankMessageSpecial
-  </v-card>
-</template>
-
-<script>
-export default {
-  name: 'RankMessageSpecial',
-}
-=======
 <template id="SpecialMessageRanks">
   <v-card
     class="pa-2 text-center title"
@@ -79,5 +63,4 @@ export default {
     ]
   }),
 }
->>>>>>> 4c6876f194fc4048149fd97685437a55e392899b
 </script>
