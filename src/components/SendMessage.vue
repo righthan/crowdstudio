@@ -6,10 +6,7 @@
         tile
         outlined
         style="height: 220px;"
-      >
-        Send Message
-        <v-divider :inset="inset"></v-divider>
-        
+      >        
         <v-row class="mt-2 mb-2" justify=center align=center>
           <v-col cols="9">
             <v-hover v-slot:default="{ hover }">
@@ -37,6 +34,18 @@
 
         <v-divider :inset="inset"></v-divider>
 
+        {{usrMessage}}
+        <v-textarea
+          v-model="message"
+          append-outer-icon='mdi-send'
+          @click:append-outer="sendMessage"
+          @keydown="OnKeydown"
+          autofocus
+          label="'shift+Enter' will send a message."
+          outlined
+          filled
+          rows="3"
+        />
 
       </v-card>
     </v-col>
@@ -47,6 +56,40 @@
 <script>
 export default {
   name: 'SendMessage',
+  data: function () {
+    return {
+      isTargetViewer: true,
+      message: '', 
+    }
+  },
+
+  computed: {
+    usrMessage: function () {
+      if (this.isTargetViewer === true) {
+        return "> All viewers (Press 'tab' to send to streamer)"
+      }
+      else {
+        return "> Streamer (Press 'tab' to send to all viewers)"
+      }
+    },
+  },
+
+  methods: {
+    OnKeydown: function (event) {
+      if (event.key === "Tab") {
+        event.preventDefault()
+        this.isTargetViewer = !this.isTargetViewer
+      }
+      else if (event.key === "Enter" && event.shiftKey) {
+        event.preventDefault()
+        this.sendMessage()
+      }
+    },
+    sendMessage: function () {
+      this.message = ''
+      console.log("TEMP: Send a message")
+    }
+  }
 }
 </script>
 
