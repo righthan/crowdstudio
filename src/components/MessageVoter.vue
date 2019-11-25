@@ -9,7 +9,7 @@
 
         <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
         
-        <ChatVote/>
+        <ChatVote @messageLike = "reflectLike"/>
     </v-card>
 
 </template>
@@ -28,13 +28,14 @@ export default {
 
   mounted() {
     this.timer = setInterval(() => {
-      this.bar.value = this.bar.value - 10
-    }, 1000)
+      this.bar.value = this.bar.value - 1
+    }, 100)
   },
 
   data: () =>({
     countDown : 10,
-    bar:{value:100}
+    bar:{value:100},
+    messageShow: false,
   }),
 
   methods:{

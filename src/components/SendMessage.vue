@@ -65,6 +65,18 @@ export default {
     sendMessage: function () {
       this.message = ''
       console.log("TEMP: Send a message")
+    },
+    reflectLike: function() {
+      this.messageLiked = true;
+      var node = document.createElement("div")
+      node.setAttribute("id","WaitMessage")
+      var textnode = document.createTextNode("Waiting for message...")
+      node.appendChild(textnode)
+    
+      document.getElementById("VoteMessage").remove()
+      document.getElementById("Chatbot").appendChild(node)
+      //alert(this.messageLiked)
+      
     }
   }
 }
