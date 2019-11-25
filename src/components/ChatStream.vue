@@ -7,14 +7,17 @@
         outlined
         style="height: 550px;"
       >
+        <div class="overflow-y-auto" id="scroll-target" style="max-height: 550px;">
+          <div v-for="(instance, index) in messageList" :item="instance" :key="index">
+            
+            <div v-if="instance.msgState == true">
+              <message-special :message="instance.message" :user="instance.UserName"/>
+            </div>
 
-        <div v-for="(instance, index) in messageList" :item="instance" :key="index">
-          <div v-if="instance.msgState == true">
-            <message-special :message="instance.message" :user="instance.UserName"/>
-          </div>
+            <div v-else>
+              <message-normal :message="instance.message" :user="instance.UserName"/>
+            </div>
 
-          <div v-else>
-            <message-normal :message="instance.message" :user="instance.UserName"/>
           </div>
         </div>
 
@@ -43,6 +46,13 @@ export default {
       messageList: [
         {message: "sample message blah blah blah", msgState: true, UserName: "User 1"},
         {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
+        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
+        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
+        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
+        {message: "sample message blah blah blah", msgState: true, UserName: "User WTF"},
+        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
+        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
+        {message: "sample message ", msgState: false, UserName: "User 2"},
       ]
     }
   }
