@@ -33,7 +33,7 @@ export default {
   data: () => ({
     view_count: 0
   }),
-  mount() {
+  mounted() {
     this.socket.on("view count update", count => {
       this.view_count = count
     })

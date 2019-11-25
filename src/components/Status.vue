@@ -6,7 +6,7 @@
     >
         Message Status
         <v-divider :inset="inset"></v-divider>
-        <UserMessageSpecial/>
+        <UserMessageSpecial :socket="socket"/>
     </v-card>
 
 </template>
@@ -15,11 +15,12 @@
 import UserMessageSpecial from '../components/UserMessageSpecial.vue'
 export default {
   name: 'Status',
+  props: ["socket"],
   components:{
       UserMessageSpecial
     },
   data: () =>({
-      message: {content:"Message Message Message Message Message Message", rank:"10", arrow:"mdi-arrow-up"}
+      message: {content:"Message Message Message Message Message Message", rank:10, arrow:"mdi-arrow-up"}
   }),
     methods:{
         DeleteMessage(){

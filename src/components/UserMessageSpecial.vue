@@ -24,9 +24,21 @@
 <script>
 export default {
   name: 'Status',
+  props: ['socket'],
   data: () =>({
       message: {content:"Message Message Message Message Message Message", rank:"10", arrow:"mdi-arrow-up"}
   }),
+  mounted() {
+    this.socket.on("msg status update", (msg) => {
+      if(msg == null){
+        // if no current message
+        msg
+      }else{
+        // check if new rank is less or more than old rank
+        this.message = {content: msg.content, rank: msg.rank, arrow:"mdi-arrow-up"}
+      }
+    })
+  },
     methods:{
         DeleteMessage(){
             document.getElementById("rank").remove()

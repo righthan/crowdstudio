@@ -16,7 +16,7 @@
                 <rank-message-special :socket="socket"/>
               </v-col>
               <v-col cols="6">
-                <status/>
+                <status :socket="socket"/>
               </v-col>
             </v-row>
           {{test}}
