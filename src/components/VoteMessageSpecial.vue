@@ -1,45 +1,60 @@
 
 <template>
     <div v-if="liked == true">
-        <v-row align="center">
+        <v-row align="center" justify="center">
             <v-col cols="1">
                 <h2 class="purple--text"> {{rank}} </h2>
             </v-col>
 
             <v-col cols="10">
 
+            <v-hover v-slot:default="{ hover }">
                 <v-card color="#F3E5F5">
+                    <v-expand-transition>
+                        <div
+                            v-on:click = "like"
+                            v-if="hover"
+                            class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3"
+                            style="height: 100%; cursor:pointer;"
+                        >
+                            <div align="center" style="font-size: 20px">Cancel Like</div>
+                        </div>
+                    </v-expand-transition>
                     <v-card-text>{{message}}</v-card-text>
                 </v-card>
+            </v-hover>
             
             </v-col>
 
-            <v-col cols ="1">
-                <v-btn v-on:click="like" text icon color="deep-purple">
-                    <v-icon>mdi-thumb-up</v-icon>
-                </v-btn>
-            </v-col>
         </v-row>
     </div>
     <div v-else>
-        <v-row align="center">
+        <v-row justify="center" align="center">
             <v-col cols="1">
                 <h2 class="purple--text"> {{rank}} </h2>
             </v-col>
 
             <v-col cols="10">
 
+                <v-hover v-slot:default="{ hover }">
                 <v-card color="gray">
+                    <v-expand-transition>
+                        <div
+                            v-on:click = "like"
+                            v-if="hover"
+                            class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3"
+                            style="height: 100%; cursor:pointer;"
+                        >
+                            <v-icon color="deep-purple">mdi-thumb-up</v-icon>
+                        </div>
+                    </v-expand-transition>
                     <v-card-text>{{message}}</v-card-text>
                 </v-card>
+            </v-hover>
             
             </v-col>
 
-            <v-col cols ="1">
-                <v-btn v-on:click="like" text icon color="gray">
-                    <v-icon>mdi-thumb-up</v-icon>
-                </v-btn>
-            </v-col>
+
         </v-row>
 
 
@@ -47,16 +62,6 @@
 </template>
 
 
-<style>
-    .v-card--reveal {
-    align-items: center;
-    bottom: 0;
-    justify-content: center;
-    opacity: .8;
-    position: absolute;
-    width: 100%;
-    }
-</style>
 
 <script>
 export default {
@@ -79,3 +84,14 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+    .v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    opacity: .8;
+    position: absolute;
+    width: 100%;
+    }
+</style>
