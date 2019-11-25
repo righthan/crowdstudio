@@ -1,8 +1,8 @@
 <template>
     <v-card
-        class="pa-2"
-        tile
-        style="height: 300px;"
+    class="pa-2 text-center title"
+    tile
+    style="height: 300px;"
     >
         Message Status
         <v-divider :inset="inset"></v-divider>
