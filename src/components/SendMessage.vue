@@ -41,7 +41,7 @@
           @click:append-outer="sendMessage"
           @keydown="OnKeydown"
           autofocus
-          :label="usrMessage"
+          label="'shift+Enter' will send a message."
           outlined
           filled
           rows="3"
@@ -80,24 +80,7 @@ export default {
         this.isTargetViewer = !this.isTargetViewer
       }
       else if (event.key === "Enter" && event.shiftKey) {
-        this.sendMessage()
-      }
-    },
-    sendMessage: function () {
-      this.message = ''
-      console.log("TEMP: Send a message")
-    }
-  }
-}
-</script>
-
-  methods: {
-    OnKeydown: function (event) {
-      if (event.key === "Tab") {
         event.preventDefault()
-        this.isTargetViewer = !this.isTargetViewer
-      }
-      else if (event.key === "Enter" && event.shiftKey) {
         this.sendMessage()
       }
     },
