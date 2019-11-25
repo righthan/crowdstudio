@@ -8,32 +8,12 @@
         style="height: 220px;"
       >
         Send Message
-        <v-divider :inset="inset"></v-divider>
-        
-        <v-row class="mt-2 mb-2" justify=center align=center>
-          <v-col cols="9">
-            <v-hover v-slot:default="{ hover }">
-              <v-card color="#F3E5F5">
-                
-                <v-expand-transition>
-                  <div
-                    v-if="hover"
-                    class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3"
-                    style="height: 100%;"
-                  >
-                    <v-btn text icon color="deep-purple">
-                       <v-icon>mdi-thumb-up</v-icon>
-                    </v-btn>
-                  </div>
-                </v-expand-transition>
+        {{ countDown }}
 
-                <v-card-text>Message Message Message Message Message Message</v-card-text>
-                
-                </v-card>
-            </v-hover>
-          </v-col>
-          
-        </v-row>
+          <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
+        
+        
+        <ChatVote/>
 
         <v-divider :inset="inset"></v-divider>
 
@@ -45,8 +25,50 @@
 </template>
 
 <script>
+import ChatVote from '../components/ChatVote.vue'
+
 export default {
+  
   name: 'SendMessage',
+  components: {ChatVote},
+  methods:{
+    countDownTimer() {
+                if(this.countDown > 0) {
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        this.countDownTimer()
+                    }, 1000)
+                    }
+                if(this.countDown==0) {
+                  var node = document.createElement("div")
+                  node.setAttribute("id","WaitMessage")
+                  var textnode = document.createTextNode("Waiting for message...")
+                  node.appendChild(textnode)
+                
+                  document.getElementById("VoteMessage").remove()
+                  document.getElementById("Chatbot").appendChild(node)
+                }
+                
+            }
+  },
+  data() {
+            return {
+                countDown : 10,
+                bar:{value:100}
+            }
+        },
+
+  created() {
+           this.countDownTimer()
+        },
+  
+  mounted(){
+      this.timer = setInterval(() => {
+        this.bar.value = this.bar.value - 10
+      }, 1000)
+
+  }
+      
 }
 </script>
 
@@ -59,4 +81,6 @@ export default {
   position: absolute;
   width: 100%;
 }
+
+
 </style>
