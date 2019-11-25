@@ -20,8 +20,11 @@
 export default {
   name: 'MessageSpecial',
   data: () => ({
-    user: 'user1',
-    message: 'special special special special special special '
+
   }),
+  props: {
+    message: String,
+    user: String,
+  }
 }
 </script>

@@ -46,6 +46,8 @@ export default {
     updateLiked(variable1, variable2) {
       this.specialMsg = this.rankList[variable2-1].text;
       this.rankList[variable2-1].liked = variable1;
+
+      // change the score of the liked message when clicked by the user
       if (variable1 == true){
         this.rankList[variable2-1].score += 1;
         //alert(this.rankList[variable2-1].score);

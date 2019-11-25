@@ -3,7 +3,7 @@
   <v-row>
     <v-col cols="3">
       <div style="color: green; font-weight: bold;">
-        {{user}}:
+        {{user}}
       </div>
     </v-col>
     <v-col cols="9">
@@ -20,8 +20,11 @@
 export default {
   name: 'MessageNormal',
   data: () => ({
-    user: 'user1',
-    message: 'normal normal normal normal normal'
+
   }),
+  props: {
+    message: String,
+    user: String,
+  }
 }
 </script>
