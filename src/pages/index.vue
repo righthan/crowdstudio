@@ -8,22 +8,22 @@
           text-center
           wrap
         >
-          <v-col cols="9">
-
+          <v-col cols="8">
             <live-stream />
             <v-row>
               <v-col cols="6">
                 <rank-message-special/>
               </v-col>
               <v-col cols="6">
-                <status/>
+                <message-voter/>
               </v-col>
             </v-row>
 
           </v-col>
 
-          <v-col cols="3">
+          <v-col cols="4">
             <chat-stream/>
+            <status/>
             <send-message/>
           </v-col>
 
@@ -35,11 +35,12 @@
 
 <script>
 import Header from '../components/Header.vue'
-import Status from '../components/Status.vue'
+import MessageVoter from '../components/MessageVoter.vue'
 import LiveStream from '../components/LiveStream.vue'
 import SendMessage from '../components/SendMessage.vue'
 import ChatStream from '../components/ChatStream.vue'
 import RankMessageSpecial from '../components/RankMessageSpecial.vue'
+import Status from '../components/Status.vue'
 
 export default {
   name: 'Index',
@@ -49,6 +50,7 @@ export default {
     SendMessage,
     ChatStream,
     RankMessageSpecial,
+    MessageVoter,
     Status,
   },
 

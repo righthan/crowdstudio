@@ -5,9 +5,9 @@
         class="pa-2"
         tile
         outlined
-        style="height: 550px;"
+        style="height: 500px;"
       >
-        <div class="overflow-y-auto" id="scroll-target" style="max-height: 550px;">
+        <div class="overflow-y-auto" id="scroll-target" style="max-height: 500px;">
           <div v-for="(instance, index) in messageList" :item="instance" :key="index">
             
             <div v-if="instance.msgState == true">

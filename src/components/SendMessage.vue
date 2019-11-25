@@ -1,109 +1,67 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-card
-        class="pa-2"
-        tile
-        outlined
-        style="height: 220px;"
-      >
-        Send Message
-        {{ countDown }}
+  <v-card
+    class="pa-2"
+    tile
+    outlined
+    style="height: 150px;"
+  >
+    <span v-html="usrMessage"/>
+    <v-textarea
+      v-model="message"
+      append-outer-icon='mdi-send'
+      @click:append-outer="sendMessage"
+      @keydown="OnKeydown"
+      autofocus
+      label="Shift+Enter will add a new line"
+      outlined
+      filled
+      :background-color="backgroundColor"
+      color="purple"
+      rows="3"
+    />
 
-          <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
-        
-        
-        <ChatVote/>
-
-        <v-divider :inset="inset"></v-divider>
-
-        {{usrMessage}}
-        <v-textarea
-          v-model="message"
-          append-outer-icon='mdi-send'
-          @click:append-outer="sendMessage"
-          @keydown="OnKeydown"
-          autofocus
-          label="'shift+Enter' will send a message."
-          outlined
-          filled
-          rows="3"
-        />
-
-      </v-card>
-    </v-col>
-  </v-row>
+  </v-card>
   
 </template>
 
 <script>
-import ChatVote from '../components/ChatVote.vue'
 
 export default {
-  
   name: 'SendMessage',
-  components: {
-    ChatVote
-  },
 
-  created() {
-    this.countDownTimer()
-  },
-  
-  mounted() {
-    this.timer = setInterval(() => {
-      this.bar.value = this.bar.value - 10
-    }, 1000)
-  },
-      
   data: function () {
     return {
       isTargetViewer: true,
+      usrMessage: "> All viewers (Press <strong>tab</strong> to send to streamer)",
+      backgroundColor: 'grey lighten-2',
       message: '',
-      countDown : 10,
-      bar:{value:100}
     }
   },
 
-  computed: {
-    usrMessage: function () {
-      if (this.isTargetViewer === true) {
-        return "> All viewers (Press 'tab' to send to streamer)"
+  methods: {
+    switchTargetViewer: function () {
+      if (this.isTargetViewer) {
+        this.usrMessage = "> <span style='color:purple'> <strong>Streamer</strong> </span> (Press <strong>tab</strong> to send to all viewers)"
+        this.backgroundColor = '#F3E5F5'
       }
       else {
-        return "> Streamer (Press 'tab' to send to all viewers)"
+        this.usrMessage = "> All viewers (Press <strong>tab</strong> to send to streamer)"
+        this.backgroundColor = 'grey lighten-2'
       }
+      this.isTargetViewer = !this.isTargetViewer
     },
-  },
 
-  methods: {
-    countDownTimer: function () {
-      if(this.countDown > 0) {
-          setTimeout(() => {
-              this.countDown -= 1
-              this.countDownTimer()
-          }, 1000)
-          }
-      if(this.countDown==0) {
-        var node = document.createElement("div")
-        node.setAttribute("id","WaitMessage")
-        var textnode = document.createTextNode("Waiting for message...")
-        node.appendChild(textnode)
-      
-        document.getElementById("VoteMessage").remove()
-        document.getElementById("Chatbot").appendChild(node)
-      }
-    },
     OnKeydown: function (event) {
       if (event.key === "Tab") {
         event.preventDefault()
-        this.isTargetViewer = !this.isTargetViewer
+        this.switchTargetViewer()
       }
-      else if (event.key === "Enter" && event.shiftKey) {
+      else if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault()
         this.sendMessage()
       }
     },
+
     sendMessage: function () {
       this.message = ''
       console.log("TEMP: Send a message")
