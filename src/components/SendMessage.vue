@@ -57,13 +57,6 @@
 export default {
   name: 'SendMessage',
   props: ["socket"],
-  methods: {
-    sendMessage: function(event) {
-      event
-      // send message to message variable
-
-    }
-  }
   data: function () {
     return {
       isTargetViewer: true,
@@ -81,7 +74,6 @@ export default {
       }
     },
   },
-
   methods: {
     OnKeydown: function (event) {
       if (event.key === "Tab") {
@@ -94,8 +86,8 @@ export default {
       }
     },
     sendMessage: function () {
+      this.socket.emit("message", {text: this.message, isSpecial: !this.isTargetViewer})
       this.message = ''
-      this.socket.emit("message", false)
     }
   }
 }

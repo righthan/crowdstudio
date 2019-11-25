@@ -37,19 +37,16 @@ export default {
     MessageNormal,
     MessageSpecial,
   },
-  mount() {
+  mounted() {
     this.socket.on("message", (msg) => {
-      msg
+      this.messageList.push({message: msg.text, msgState: msg.isSpecial, UserName: msg.userID})
       // display message
     })
   },
   data: function() {
     return {
-      
-      
       // for msgState
       //true == Special, false == normal
-      
       messageList: [
         {message: "sample message blah blah blah", msgState: true, UserName: "User 1"},
         {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},

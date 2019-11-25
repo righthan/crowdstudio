@@ -26,10 +26,14 @@ import VoteMessageSpecial from '../components/VoteMessageSpecial.vue'
 export default {
   name: 'RankMessageSpecial',
   props: ["socket"],
-  mount() {
+  mounted() {
     this.socket.on("rank list update", (list) => {
       // update rank list
-      this.rankList = list
+      let urlParams = new URLSearchParams(window.location.search);
+      let userID = urlParams.get('userID');
+      this.rankList = list.map((msg) => {
+          return {text: msg.text, liked: msg.shownUsers.includes(userID), score: msg.score}
+      })
     })
   },
   components: {
@@ -39,13 +43,7 @@ export default {
     return {
       specialMsg: "WTF",
       likeStatus: true,
-      rankList: [
-        {text: 'first message', liked: false, score: 0},
-        {text: 'second message', liked: false, score: 0},
-        {text: 'third message', liked: false, score: 0},
-        {text: 'fourth message', liked: false, score: 0},
-        {text: 'fifth message', liked: false, score: 0},
-      ],
+      rankList: [],
     };
   },
   methods: {
