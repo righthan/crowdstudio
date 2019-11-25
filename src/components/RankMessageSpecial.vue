@@ -11,7 +11,7 @@
         <v-col class="text-center" >
 
           <div v-for="(message, index) in rankList" :item="message" :key="index">
-              <vote-message-special @clickLike="updateLiked" :message="message.text" :rank="message.rank"> </vote-message-special>
+              <vote-message-special @clickLike="updateLiked" :message="message.text" :rank="index+1"> </vote-message-special>
           </div>
 
         </v-col>
@@ -33,11 +33,11 @@ export default {
       specialMsg: "WTF",
       likeStatus: true,
       rankList: [
-        {text: 'first message', liked: false, rank: 1},
-        {text: 'second message', liked: false, rank: 2},
-        {text: 'third message', liked: false, rank: 3},
-        {text: 'fourth message', liked: false, rank: 4},
-        {text: 'fifth message', liked: false, rank: 5},
+        {text: 'first message', liked: false, score: 0},
+        {text: 'second message', liked: false, score: 0},
+        {text: 'third message', liked: false, score: 0},
+        {text: 'fourth message', liked: false, score: 0},
+        {text: 'fifth message', liked: false, score: 0},
       ],
     };
   },
@@ -45,7 +45,15 @@ export default {
     // changes the "liked" status of the messages user has liked
     updateLiked(variable1, variable2) {
       this.specialMsg = this.rankList[variable2-1].text;
-      this.likeStatus = variable1;
+      this.rankList[variable2-1].liked = variable1;
+      if (variable1 == true){
+        this.rankList[variable2-1].score += 1;
+        //alert(this.rankList[variable2-1].score);
+      }
+      else {
+        this.rankList[variable2-1].score -= 1;
+        //alert(this.rankList[variable2-1].score);
+      }
     }
   },
 }
