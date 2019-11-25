@@ -10,12 +10,12 @@
         Send Message
         {{ countDown }}
 
-          <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
+        <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
         
         
-        <ChatVote/>
+        <ChatVote @messageLike = "reflectLike"/>
 
-        <v-divider :inset="inset"></v-divider>
+        <v-divider></v-divider>
 
         {{usrMessage}}
         <v-textarea
@@ -52,8 +52,8 @@ export default {
   
   mounted() {
     this.timer = setInterval(() => {
-      this.bar.value = this.bar.value - 10
-    }, 1000)
+      this.bar.value = this.bar.value - 1
+    }, 100)
   },
       
   data: function () {
@@ -61,7 +61,9 @@ export default {
       isTargetViewer: true,
       message: '',
       countDown : 10,
-      bar:{value:100}
+      bar:{value:100},
+      messageShow: false,
+      
     }
   },
 
@@ -84,7 +86,7 @@ export default {
               this.countDownTimer()
           }, 1000)
           }
-      if(this.countDown==0) {
+      if(this.countDown == 0) {
         var node = document.createElement("div")
         node.setAttribute("id","WaitMessage")
         var textnode = document.createTextNode("Waiting for message...")
@@ -107,6 +109,18 @@ export default {
     sendMessage: function () {
       this.message = ''
       console.log("TEMP: Send a message")
+    },
+    reflectLike: function() {
+      this.messageLiked = true;
+      var node = document.createElement("div")
+      node.setAttribute("id","WaitMessage")
+      var textnode = document.createTextNode("Waiting for message...")
+      node.appendChild(textnode)
+    
+      document.getElementById("VoteMessage").remove()
+      document.getElementById("Chatbot").appendChild(node)
+      //alert(this.messageLiked)
+      
     }
   }
 }
