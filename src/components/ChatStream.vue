@@ -57,6 +57,11 @@ export default {
         {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
         {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
         {message: "sample message ", msgState: false, UserName: "User 2"},
+        {message: "sample message ", msgState: false, UserName: "User 2"},
+        {message: "sample message ", msgState: false, UserName: "User 2"},
+        {message: "sample message ", msgState: false, UserName: "User 2"},
+        {message: "sample message ", msgState: false, UserName: "User 2"},
+
       ]
     }
   }

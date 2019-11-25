@@ -8,12 +8,10 @@
     Ranks
      <v-divider></v-divider>
       <div class="overflow-y-auto" id="scroll-target" style="max-height: 250px;">
-        <v-col class="text-center" >
-
-          <div v-for="(message, index) in rankList" :item="message" :key="index">
+        <v-col class="text-center">
+            <div  v-for="(message, index) in rankList" :item="message" :key="index">
               <vote-message-special @clickLike="updateLiked" :message="message.text" :rank="index+1"> </vote-message-special>
-          </div>
-
+            </div>
         </v-col>
       </div>
     
