@@ -7,7 +7,7 @@
       </div>
     </v-col>
     <v-col cols="9">
-      <div style="color: purple">
+      <div style="color: purple; font-weight: bold;">
         {{message}}
       </div>
     </v-col>
