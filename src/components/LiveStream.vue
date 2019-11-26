@@ -38,6 +38,9 @@ export default {
 
     this.socket.on("sound message", (msg) => {
       this.specialMessage = msg.text
+      setTimeout(() => {
+        this.specialMessage = ""
+      }, 10000)
     })
   },
   data: function () {

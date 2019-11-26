@@ -21,11 +21,8 @@ export default {
   name:'ChatVote',
   data() {
         return {
+          messageDied: false
         }
-    },
-
-  created() {
-        this.countDownTimer()
     }
 }
 </script>

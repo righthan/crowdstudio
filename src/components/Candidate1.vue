@@ -5,7 +5,7 @@
                 <v-card flat id="message1" color="#F3E5F5" disabled>
                     
 
-                <v-card-text>{{this.toVoteMsg}}</v-card-text>
+                <v-card-text>{{toVoteMsg}}</v-card-text>
                 
                 </v-card>
             </v-hover>
@@ -28,18 +28,19 @@
                 </div>
                 </v-expand-transition>
 
-                <v-card-text>{{this.toVoteMsg}}}</v-card-text>
+                <v-card-text>{{toVoteMsg}}</v-card-text>
                 
                 </v-card>
             </v-hover>
         </v-col>
+
 
 </template>
 
 <script>
 export default{
     name : 'Candidate1',
-    props: ["toVoteID", "toVoteMsg"],
+    props: ["socket", "toVoteID", "toVoteMsg"],
     data(){
         return{
             liked: false,

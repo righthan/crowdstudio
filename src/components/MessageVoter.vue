@@ -5,7 +5,7 @@
       style="height: 300px;"
     >
         <span class="panel_header_lg">
-          Click a message in {{ countDown }}s if you like it. <v-icon color="blue">mdi-thumb-up</v-icon>
+          Click a message in {{ countDown }}s if you like it. <v-icon color="gray">mdi-thumb-up</v-icon>
         </span>
 
         <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
@@ -68,8 +68,7 @@ export default {
               this.bar.value = this.bar.value - 10
               this.countDownTimer()
           }, 1000)
-      }
-      if(this.countDown==0) {
+      }else if(this.countDown == 0) {
         // send response
         this.socket.emit("vote response", {userID: this.toVoteID1, isUpvoted: false})
         if(this.toVoteID2 > 1)
