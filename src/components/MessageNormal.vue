@@ -6,7 +6,7 @@
         {{user}}
       </div>
     </v-col>
-    <v-col cols="8">
+    <v-col cols="9">
       <div style="color: black">
         {{message}}
       </div>

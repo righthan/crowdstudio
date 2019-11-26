@@ -8,23 +8,22 @@
           text-center
           wrap
         >
-          <v-col cols="9">
-
-            <live-stream :socket="socket"/>
+          <v-col cols="8">
+            <live-stream />
             <v-row>
               <v-col cols="6">
                 <rank-message-special :socket="socket"/>
               </v-col>
               <v-col cols="6">
-                <status :socket="socket"/>
+                <message-voter :socket="socket"/>
               </v-col>
             </v-row>
           {{test}}
           </v-col>
-
-          <v-col cols="3">
+          <v-col cols="4">
             <chat-stream :socket="socket"/>
-            <send-message :socket="socket"/>
+            <status :socket="socket"/>
+            <send-message: :socket="socket"/>
           </v-col>
 
         </v-row>
@@ -35,11 +34,13 @@
 
 <script>
 import Header from '../components/Header.vue'
-import Status from '../components/Status.vue'
+import MessageVoter from '../components/MessageVoter.vue'
 import LiveStream from '../components/LiveStream.vue'
 import SendMessage from '../components/SendMessage.vue'
 import ChatStream from '../components/ChatStream.vue'
 import RankMessageSpecial from '../components/RankMessageSpecial.vue'
+import Status from '../components/Status.vue'
+import "@/assets/global.css"
 
 import io from 'socket.io-client';
 
@@ -51,15 +52,20 @@ export default {
     SendMessage,
     ChatStream,
     RankMessageSpecial,
+    MessageVoter,
     Status,
   },
   data: () => ({
     socket: io('localhost:3001')
   }),
+<<<<<<< HEAD
   mounted() {
     let urlParams = new URLSearchParams(window.location.search);
     let userID = urlParams.get('userID');
     this.socket.emit("register", userID);
   },
+=======
+  
+>>>>>>> 8808c29a91df3be9ce30740036aaaec83f703c2e
 };
 </script>

@@ -5,7 +5,8 @@
     outlined
     style="height: 500px;"
   >
-    <iframe src="https://player.twitch.tv/?channel=tvcrank" frameborder="0" allowfullscreen="true" scrolling="no" height="85%" width="100%"></iframe>
+    <iframe src="https://player.twitch.tv/?channel=tvcrank" frameborder="0" allowfullscreen="false" scrolling="no" height="85%" width="100%"></iframe>
+    <div id="over"> {{specialMessage}} </div>
     <v-divider/>
     <v-row>
       <v-col cols="6" align-self="start" class = "video_info">
@@ -30,13 +31,16 @@
 export default {
   name: 'LiveStream',
   props: ["socket"],
-  data: () => ({
-    view_count: 0
-  }),
   mounted() {
     this.socket.on("view count update", count => {
       this.view_count = count
     })
+  },
+  data: function () {
+    return {
+      specialMessage: '',
+      view_count: 0
+    }
   }
 }
 </script>
@@ -45,5 +49,15 @@ export default {
 .video_info {
   padding-top: 0px;
   padding-bottom: 0px;
+}
+
+#over {
+  position: absolute;
+  color:orange;
+  font-size:2em;
+  bottom: 20%;
+  left: 10%;
+  z-index:2;
+  background-color: rgba(0,0,0,0.7);
 }
 </style>

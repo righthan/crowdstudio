@@ -1,30 +1,24 @@
 <template>
+    <v-row align="center" justify="center">
+        <v-col id="rank" cols="2">
+            <div class="text-center title grey--text">{{message ? message.rank : ""}}</div>
+            <div class="text-center"><v-icon large justify-center color="purple">{{message ? message.arrow : ""}}</v-icon></div>
+        </v-col>
+        <v-col id="message" cols="8">
+            <v-card color="#F3E5F5"><v-card-text>{{message ? message.content : ""}}</v-card-text></v-card>
+        </v-col>
 
-    <v-container>
-        <v-row class="mt-8 mb-8 ml-1">
-            <v-col id="rank" cols="2">
-                <div class="text-center title grey--text">{{message ? message.rank : ""}}</div>
-                <div class="text-center"><v-icon large justify-center color="purple">{{message ? message.arrow : ""}}</v-icon></div>
-
-            </v-col>
-            <v-col id="message" cols="9">
-                <v-card color="#F3E5F5"><v-card-text>{{message ? message.content : ""}}</v-card-text></v-card>
-
-            </v-col>
-        </v-row>
-        <v-row justify="center">
-                <v-btn id="dbtn"  @click="DeleteMessage()" class="white--text" color="red">Delete<v-icon right>mdi-delete</v-icon></v-btn>
-        </v-row>
-    </v-container>
-
-
-
+        <v-col cols="2">
+            <v-btn id="dbtn"  @click="DeleteMessage()" class="white--text" color="red" icon outlined><v-icon>mdi-delete</v-icon></v-btn>    
+        </v-col>
+    </v-row>
 </template>
 
 <script>
 export default {
   name: 'Status',
   props: ['socket'],
+  name: 'UserMessageSpecial',
   data: () =>({
       message: null
   }),

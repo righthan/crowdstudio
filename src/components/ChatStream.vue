@@ -1,29 +1,25 @@
 <template>
-  <v-row>
-    <v-col>
-      <v-card
-        class="pa-2"
-        tile
-        outlined
-        style="height: 550px;"
-      >
-        <div class="overflow-y-auto" id="scroll-target-1" style="max-height: 530px; padding-right : 15px">
-          <div v-for="(instance, index) in messageList" :item="instance" :key="index">
-            
-            <div v-if="instance.msgState == true">
-              <message-special :message="instance.message" :user="instance.UserName"/>
-            </div>
-
-            <div v-else>
-              <message-normal :message="instance.message" :user="instance.UserName"/>
-            </div>
-
-          </div>
+  <v-card
+    class="pa-2"
+    tile
+    outlined
+    style="height: 550px;"
+  >
+    <div class="overflow-y-auto" id="scroll-target-1" style="max-height: 530px; padding-right : 15px">
+      <div v-for="(instance, index) in messageList" :item="instance" :key="index">
+        
+        <div v-if="instance.msgState == true">
+          <message-special :message="instance.message" :user="instance.UserName"/>
         </div>
 
-      </v-card>
-    </v-col>
-  </v-row>
+        <div v-else>
+          <message-normal :message="instance.message" :user="instance.UserName"/>
+        </div>
+
+      </div>
+    </div>
+
+  </v-card>
 </template>
 
 <script>

@@ -1,11 +1,12 @@
 <template>
   <v-card
-    class="pa-2 text-center title"
+    class="pa-2 text-center"
     tile
-    style="height: 300px;"
-    
+    style="height: 300px;" 
   >
-    Ranks
+     <span class="panel_header_lg">
+       Ranks
+     </span>
      <v-divider></v-divider>
       <div class="overflow-y-auto" id="scroll-target" style="max-height: 250px;">
         <v-col class="text-center" >
