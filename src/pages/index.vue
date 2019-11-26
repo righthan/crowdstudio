@@ -56,7 +56,7 @@ export default {
     Status,
   },
   data: () => ({
-    socket: io('https://ec2-54-180-96-9.ap-northeast-2.compute.amazonaws.com:3000')
+    socket: io('http://ec2-54-180-96-9.ap-northeast-2.compute.amazonaws.com:3000')
   }),
   mounted() {
     let urlParams = new URLSearchParams(window.location.search);
