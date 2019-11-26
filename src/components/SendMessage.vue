@@ -11,10 +11,9 @@
 
         <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
         
-        
-        <ChatVote :socket="socket" :toVoteMessage="toVoteMessage" :toVoteUserID="toVoteUserID" :countDown="countDown"/>
+        <ChatVote :socket="socket" :toVoteID1="toVoteID1" :toVoteMsg1="toVoteMsg1" :toVoteID2="toVoteID2" :toVoteMsg2="toVoteMsg2"/>
 
-        <v-divider :inset="inset"></v-divider>
+        <v-divider></v-divider>
 
         {{usrMessage}}
         <v-textarea
@@ -47,22 +46,35 @@ export default {
   },
   mounted() {
     this.socket.on("vote message", (msg) => {
-      if(msg){
-        this.toVoteUserID = msg.userID
-        this.toVoteMessage = msg.text
-        document.getElementById("VoteMessage").hidden = false
+      if(msg && !this.toVoteID1){
+        this.toVoteID1 = msg.userID
+        this.toVoteMsg1 = msg.text
+      }else if(msg && this.toVoteID1) {
+        this.toVoteID2 = msg.userID
+        this.toVoteMsg2 = msg.text
         document.getElementById("WaitMessage").hidden = true
+        document.getElementById("VoteMessage1").hidden = false
+        document.getElementById("VoteMessage2").hidden = false
+        this.countDown = 10
+        this.bar.value = 100
+        this.countDownTimer()
+      }else if(!msg && this.toVoteID1){
+        document.getElementById("WaitMessage").hidden = true
+        document.getElementById("VoteMessage1").hidden = false
+        document.getElementById("VoteMessage2").hidden = true
         this.countDown = 10
         this.bar.value = 100
         this.countDownTimer()
       } else {
         setTimeout(() => {
           this.socket.emit("request vote")
+          this.socket.emit("request vote")
         }, 5000)
       }
     })
     
     setTimeout(() => {
+      this.socket.emit("request vote")
       this.socket.emit("request vote")
     }, 10000)
   },
@@ -72,8 +84,10 @@ export default {
       message: '',
       countDown : 0,
       bar:{value:0},
-      toVoteUserID: "hello",
-      toVoteMessage: "hi"
+      toVoteID1: null,
+      toVoteMsg1: null,
+      toVoteID2: null,
+      toVoteMsg2: null,
     }
   },
 
@@ -97,14 +111,20 @@ export default {
           }, 1000)
       }
       if(this.countDown==0) {
-        document.getElementById("VoteMessage").hidden = true
+        document.getElementById("VoteMessage1").hidden = true
+        document.getElementById("VoteMessage2").hidden = true
         document.getElementById("WaitMessage").hidden = false
 
         // send response
-        this.socket.emit("vote response", {userID: this.toVoteUserID, isUpvoted: false})
-        this.toVoteUserID = ""
-        this.voteMessage = ""
+        this.socket.emit("vote response", {userID: this.toVoteID1, isUpvoted: false})
+        if(this.toVoteID2 > 1)
+          this.socket.emit("vote response", {userID: this.toVoteID2, isUpvoted: false})
+        this.toVoteID1 = null
+        this.toVoteMsg1 = null
+        this.toVoteID2 = null
+        this.toVoteMsg2 = null
         setTimeout(() => {
+          this.socket.emit("request vote")
           this.socket.emit("request vote")
         }, 5000)
       }
@@ -122,9 +142,11 @@ export default {
     sendMessage: function () {
       this.socket.emit("message", {text: this.message, isSpecial: !this.isTargetViewer})
       this.message = ''
-    }
+      console.log("TEMP: Send a message")
+    },
   }
 }
+//<ChatVote :socket="socket" :toVoteMessage="toVoteMessage" :toVoteUserID="toVoteUserID" :countDown="countDown"/>
 </script>
 
 <style scoped>
@@ -138,3 +160,5 @@ export default {
 }
 
 </style>
+
+

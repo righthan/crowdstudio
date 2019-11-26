@@ -7,7 +7,7 @@
         outlined
         style="height: 550px;"
       >
-        <div class="overflow-y-auto" id="scroll-target" style="max-height: 550px;">
+        <div class="overflow-y-auto" id="scroll-target-1" style="max-height: 530px; padding-right : 15px">
           <div v-for="(instance, index) in messageList" :item="instance" :key="index">
             
             <div v-if="instance.msgState == true">
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import MessageNormal from './MessageNormal.vue'
-import MessageSpecial from './MessageSpecial.vue'
+  import MessageNormal from './MessageNormal.vue'
+  import MessageSpecial from './MessageSpecial.vue'
 
 export default {
   name: 'ChatStream',
@@ -40,6 +40,7 @@ export default {
   mounted() {
     this.socket.on("message", (msg) => {
       this.messageList.push({message: msg.text, msgState: msg.isSpecial, UserName: msg.userID})
+      this.updateScroll()
       // display message
     })
   },
@@ -61,9 +62,15 @@ export default {
         {message: "sample message ", msgState: false, UserName: "User 2"},
         {message: "sample message ", msgState: false, UserName: "User 2"},
         {message: "sample message ", msgState: false, UserName: "User 2"},
-
       ]
     }
   }
 }
+
+function updateScroll(){
+  var element = document.getElementById("scroll-target-1");
+  element.scrollTop = element.scrollHeight;
+}
+
+setInterval(updateScroll,1000);
 </script>

@@ -1,46 +1,32 @@
 <template>
 
-    <v-row class="mt-2 mb-2" justify=center align=center style="height:100px">
+    <v-row id="chatbot" class="mt-2 mb-2" justify=center align=center style="height:100px">
+        
+        <Candidate1 :socket="socket" :toVoteID="toVoteID1" :toVoteMsg="toVoteMsg1"/>
 
-            <v-col cols="9" id="Chatbot">
-                <v-hover v-slot:default="{ hover }" id="VoteMessage" hidden="true">
-                  <v-card color="#F3E5F5">
-                    
-                    <v-expand-transition>
-                      <div
-                          @click="LikeMessage()"
-                          v-if="hover"
-                          class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3"
-                          style="height: 100%; cursor:pointer;"
-                      >
-                          <v-icon color="deep-purple">mdi-thumb-up</v-icon>
-                      </div>
-                    </v-expand-transition>
-
-                    <v-card-text>{{toVoteMessage}}</v-card-text>
-                  
-                  </v-card>
-                </v-hover>
-                <div id="WaitMessage">
-                  Waiting for message...
-                </div>
-            </v-col>
-            
-            </v-row>
+        <Candidate2 :socket="socket" :toVoteID="toVoteID2" :toVoteMsg="toVoteMsg2"/>
+        <div id="WaitMessage">
+          Waiting for message(s)...
+        </div>
+    </v-row>
 </template>
 
 <script>
+import Candidate1 from '../components/Candidate1.vue'
+import Candidate2 from '../components/Candidate2.vue'
+
 export default {
-    name:'ChatVote',
-    props: ["socket", "toVoteMessage", "toVoteUserID"],
-    methods:{
-      LikeMessage(){
-        this.socket.emit("vote response", {userID: this.toVoteUserID, isUpvoted: true})        
-        document.getElementById("VoteMessage").hidden = true
-        document.getElementById("WaitMessage").hidden = false
-      }
+  components: {Candidate1,Candidate2},
+  props: ["socket", "toVoteID1", "toVoteMsg1", "toVoteID2", "toVoteMsg2"],
+  name:'ChatVote',
+  data() {
+        return {
+        }
     },
-    data() {}
+
+  created() {
+        this.countDownTimer()
+    }
 }
 </script>
 
