@@ -9,22 +9,22 @@
       >
         <span class="panel_header_sm">Your message to the streamer is now</span>
         <v-divider :inset="inset"/>
-        <UserMessageSpecial/>
+        <UserMessageSpecial :socket="socket"/>
       </v-card>
     </v-col>
   </v-row>
-  
 </template>
 
 <script>
 import UserMessageSpecial from '../components/UserMessageSpecial.vue'
 export default {
   name: 'Status',
+  props: ["socket"],
   components:{
       UserMessageSpecial
     },
   data: () =>({
-      message: {content:"Message Message Message Message Message Message", rank:"10", arrow:"mdi-arrow-up"}
+      message: {content:"Message Message Message Message Message Message", rank:10, arrow:"mdi-arrow-up"}
   }),
     methods:{
         DeleteMessage(){

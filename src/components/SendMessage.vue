@@ -28,7 +28,7 @@
 
 export default {
   name: 'SendMessage',
-
+  props: ["socket"],
   data: function () {
     return {
       isTargetViewer: true,
@@ -50,7 +50,6 @@ export default {
       }
       this.isTargetViewer = !this.isTargetViewer
     },
-
     OnKeydown: function (event) {
       if (event.key === "Tab") {
         event.preventDefault()
@@ -63,15 +62,9 @@ export default {
     },
 
     sendMessage: function () {
+      this.socket.emit("message", {text: this.message, isSpecial: !this.isTargetViewer})
       this.message = ''
-      console.log("TEMP: Send a message")
     },
-    reflectLike: function() {
-      this.messageLiked = true;
-
-      //alert(this.messageLiked)
-    },
-    
   }
 }
 </script>
@@ -87,3 +80,5 @@ export default {
 }
 
 </style>
+
+

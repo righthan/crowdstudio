@@ -9,10 +9,12 @@
      </span>
      <v-divider></v-divider>
       <div class="overflow-y-auto" id="scroll-target" style="max-height: 250px;">
-        <v-col class="text-center">
-            <div  v-for="(message, index) in rankList" :item="message" :key="index">
+        <v-col class="text-center" >
+
+          <div v-for="(message, index) in rankList" :item="message" :key="index">
               <vote-message-special @clickLike="updateLiked" :message="message.text" :rank="index+1"> </vote-message-special>
-            </div>
+          </div>
+
         </v-col>
       </div>
     
@@ -24,6 +26,17 @@ import VoteMessageSpecial from '../components/VoteMessageSpecial.vue'
 
 export default {
   name: 'RankMessageSpecial',
+  props: ["socket"],
+  mounted() {
+    this.socket.on("rank list update", (list) => {
+      // update rank list
+      let urlParams = new URLSearchParams(window.location.search);
+      let userID = urlParams.get('userID');
+      this.rankList = list.map((msg) => {
+          return {text: msg.text, liked: msg.shownUsers.includes(userID), score: msg.score}
+      })
+    })
+  },
   components: {
     VoteMessageSpecial,
   },
@@ -31,13 +44,7 @@ export default {
     return {
       specialMsg: "WTF",
       likeStatus: true,
-      rankList: [
-        {text: 'first message', liked: false, score: 0},
-        {text: 'second message', liked: false, score: 0},
-        {text: 'third message', liked: false, score: 0},
-        {text: 'fourth message', liked: false, score: 0},
-        {text: 'fifth message', liked: false, score: 0},
-      ],
+      rankList: [],
     };
   },
   methods: {

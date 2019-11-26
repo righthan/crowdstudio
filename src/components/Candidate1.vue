@@ -1,18 +1,18 @@
 <template>
 
-    <v-col cols="6"  v-if="liked == true" id="VoteMessage1">
+    <v-col cols="6"  v-if="liked == true && toVoteID" id="VoteMessage1">
             <v-hover v-slot:default="{ hover }"  >
                 <v-card flat id="message1" color="#F3E5F5" disabled>
                     
 
-                <v-card-text>{{messages.message1}}</v-card-text>
+                <v-card-text>{{this.toVoteMsg}}</v-card-text>
                 
                 </v-card>
             </v-hover>
         </v-col>
     
     
-     <v-col cols="6" v-else id="VoteMessage1">
+     <v-col cols="6" v-else-if="toVoteID" id="VoteMessage1">
             <v-hover v-slot:default="{ hover }" >
                 <v-card id="message1" color="gray">
                     
@@ -28,7 +28,7 @@
                 </div>
                 </v-expand-transition>
 
-                <v-card-text>{{messages.message1}}</v-card-text>
+                <v-card-text>{{this.toVoteMsg}}}</v-card-text>
                 
                 </v-card>
             </v-hover>
@@ -39,25 +39,16 @@
 <script>
 export default{
     name : 'Candidate1',
-
+    props: ["toVoteID", "toVoteMsg"],
     data(){
         return{
-            countDown : 10,
-            messages: {message1:" Message  Message  Message  Message", message2:" Message  Message  Message  Message"},
             liked: false,
-            likecounter: 0
         }
     },
     methods: {
       like: function() {
           this.liked = !this.liked;
-          this.$emit("clickLike", this.liked, this.rank);
-          this.$emit("messageLike");
-          this.likecounter += 1;
-
-          if(this.likecounter==2){
-              this.countDown=0;
-          }
+          this.socket.emit("vote response", {userID: this.toVoteID, isUpvoted: true})
       },
       
  

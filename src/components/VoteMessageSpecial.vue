@@ -27,16 +27,6 @@
 
                 <v-hover v-slot:default="{ hover }">
                 <v-card color="gray">
-                    <v-expand-transition>
-                        <div
-                            v-on:click = "like"
-                            v-if="hover"
-                            class="d-flex transition-fast-in-fast-out white darken-2 v-card--reveal display-3"
-                            style="height: 100%; cursor:pointer;"
-                        >
-                            <v-icon color="deep-purple">mdi-thumb-up</v-icon>
-                        </div>
-                    </v-expand-transition>
                     <v-card-text>{{message}}</v-card-text>
                 </v-card>
             </v-hover>
@@ -66,10 +56,6 @@ export default {
     rank: Number,
   },
   methods: {
-      like: function() {
-          this.liked = !this.liked;
-          this.$emit("clickLike", this.liked, this.rank);
-      }
   }
 }
 </script>

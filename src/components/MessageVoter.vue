@@ -10,7 +10,7 @@
 
         <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
         
-        <ChatVote @messageLike = "reflectLike"/>
+        <ChatVote :socket="socket" :toVoteID1="toVoteID1" :toVoteMsg1="toVoteMsg1" :toVoteID2="toVoteID2" :toVoteMsg2="toVoteMsg2"/>
     </v-card>
 
 </template>
@@ -19,42 +19,69 @@
 import ChatVote from '../components/ChatVote.vue'
 export default {
   name: 'MessageVoter',
+  props: ["socket"],
   components:{
       ChatVote
     },
-
-  created() {
-    this.countDownTimer()
-  },
-
   mounted() {
-    this.timer = setInterval(() => {
-      this.bar.value = this.bar.value - 1
-    }, 100)
+    this.socket.on("vote message", (msg) => {
+      if(msg && !this.toVoteID1){
+        this.toVoteID1 = msg.userID
+        this.toVoteMsg1 = msg.text
+      }else if(msg && this.toVoteID1) {
+        this.toVoteID2 = msg.userID
+        this.toVoteMsg2 = msg.text
+        this.countDown = 10
+        this.bar.value = 100
+        this.countDownTimer()
+      }else if(!msg && this.toVoteID1){
+        this.countDown = 10
+        this.bar.value = 100
+        this.countDownTimer()
+      } else {
+        setTimeout(() => {
+          this.socket.emit("request vote")
+          this.socket.emit("request vote")
+        }, 5000)
+      }
+    })
+    
+    setTimeout(() => {
+      this.socket.emit("request vote")
+      this.socket.emit("request vote")
+    }, 10000)
   },
-
   data: () =>({
-    countDown : 10,
-    bar:{value:100},
-    messageShow: false,
+    countDown : 0,
+    bar:{value:0},
+    toVoteID1: null,
+    toVoteMsg1: null,
+    toVoteID2: null,
+    toVoteMsg2: null,
   }),
 
-  methods:{
+  methods: {
     countDownTimer: function () {
       if(this.countDown > 0) {
           setTimeout(() => {
               this.countDown -= 1
+              this.bar.value = this.bar.value - 10
               this.countDownTimer()
           }, 1000)
-          }
+      }
       if(this.countDown==0) {
-        var node = document.createElement("div")
-        node.setAttribute("id","WaitMessage")
-        var textnode = document.createTextNode("Waiting for message...")
-        node.appendChild(textnode)
-      
-        document.getElementById("VoteMessage").remove()
-        document.getElementById("Chatbot").appendChild(node)
+        // send response
+        this.socket.emit("vote response", {userID: this.toVoteID1, isUpvoted: false})
+        if(this.toVoteID2 > 1)
+          this.socket.emit("vote response", {userID: this.toVoteID2, isUpvoted: false})
+        this.toVoteID1 = null
+        this.toVoteMsg1 = null
+        this.toVoteID2 = null
+        this.toVoteMsg2 = null
+        setTimeout(() => {
+          this.socket.emit("request vote")
+          this.socket.emit("request vote")
+        }, 5000)
       }
     },
   }

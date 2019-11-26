@@ -26,44 +26,33 @@
   import MessageNormal from './MessageNormal.vue'
   import MessageSpecial from './MessageSpecial.vue'
 
-
-  export default {
-    name: 'ChatStream',
-    components: {
-      MessageNormal,
-      MessageSpecial,
-    },
-    data: function() {
-      return {
-        
-        
-        // for msgState
-        //true == Special, false == normal
-        
-        messageList: [
-          {message: "sample message blah blah blah", msgState: true, UserName: "User 1"},
-          {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-          {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-          {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-          {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-          {message: "sample message blah blah blah", msgState: true, UserName: "User WTF"},
-          {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-          {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-          {message: "sample message ", msgState: false, UserName: "User 2"},
-          {message: "sample message ", msgState: false, UserName: "User 2"},
-          {message: "sample message ", msgState: false, UserName: "User 2"},
-          {message: "sample message ", msgState: false, UserName: "User 2"},
-          {message: "sample message ", msgState: false, UserName: "User 2"},
-
-        ]
-      }
+export default {
+  name: 'ChatStream',
+  props: ["socket"],
+  components: {
+    MessageNormal,
+    MessageSpecial,
+  },
+  mounted() {
+    this.socket.on("message", (msg) => {
+      this.messageList.push({message: msg.text, msgState: msg.isSpecial, UserName: msg.userID})
+      updateScroll()
+      // display message
+    })
+  },
+  data: function() {
+    return {
+      // for msgState
+      //true == Special, false == normal
+      messageList: [
+      ]
     }
   }
+}
 
-  function updateScroll(){
-    var element = document.getElementById("scroll-target-1");
-    element.scrollTop = element.scrollHeight;
-  }
+function updateScroll(){
+  var element = document.getElementById("scroll-target-1");
+  element.scrollTop = element.scrollHeight;
+}
 
-  setInterval(updateScroll,10000);
 </script>
