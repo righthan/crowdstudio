@@ -16,7 +16,6 @@
 
 <script>
 export default {
-  name: 'Status',
   props: ['socket'],
   name: 'UserMessageSpecial',
   data: () =>({
