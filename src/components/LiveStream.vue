@@ -35,6 +35,10 @@ export default {
     this.socket.on("view count update", count => {
       this.view_count = count
     })
+
+    this.socket.on("sound message", (msg) => {
+      this.specialMessage = msg.text
+    })
   },
   data: function () {
     return {

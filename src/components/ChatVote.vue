@@ -5,7 +5,7 @@
         <Candidate1 :socket="socket" :toVoteID="toVoteID1" :toVoteMsg="toVoteMsg1"/>
 
         <Candidate2 :socket="socket" :toVoteID="toVoteID2" :toVoteMsg="toVoteMsg2"/>
-        <div id="WaitMessage">
+        <div id="WaitMessage" v-if="!toVoteID1 && !toVoteID2">
           Waiting for message(s)...
         </div>
     </v-row>

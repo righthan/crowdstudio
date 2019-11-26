@@ -9,7 +9,7 @@
           wrap
         >
           <v-col cols="8">
-            <live-stream />
+            <live-stream :socket="socket"/>
             <v-row>
               <v-col cols="6">
                 <rank-message-special :socket="socket"/>
@@ -23,7 +23,7 @@
           <v-col cols="4">
             <chat-stream :socket="socket"/>
             <status :socket="socket"/>
-            <send-message: :socket="socket"/>
+            <send-message :socket="socket"/>
           </v-col>
 
         </v-row>
@@ -58,14 +58,10 @@ export default {
   data: () => ({
     socket: io('localhost:3001')
   }),
-<<<<<<< HEAD
   mounted() {
     let urlParams = new URLSearchParams(window.location.search);
     let userID = urlParams.get('userID');
     this.socket.emit("register", userID);
   },
-=======
-  
->>>>>>> 8808c29a91df3be9ce30740036aaaec83f703c2e
 };
 </script>

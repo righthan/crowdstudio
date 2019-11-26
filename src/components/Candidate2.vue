@@ -1,6 +1,6 @@
 <template>
 
-    <v-col cols="6" id="VoteMessage2" v-if="liked == true">
+    <v-col cols="6" id="VoteMessage2" v-if="liked == true && toVoteID">
             <v-hover v-slot:default="{ hover }"  >
                 <v-card flat id="message2" color="#F3E5F5" disabled>
                     
@@ -12,7 +12,7 @@
         </v-col>
     
     
-     <v-col cols="6" id="VoteMessage2" v-else>
+     <v-col cols="6" id="VoteMessage2" v-else-if="toVoteID">
             <v-hover v-slot:default="{ hover }" >
                 <v-card id="message2" color="gray">
                     

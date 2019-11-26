@@ -29,9 +29,6 @@
 export default {
   name: 'SendMessage',
   props: ["socket"],
-  components: {
-    ChatVote
-  },
   data: function () {
     return {
       isTargetViewer: true,
@@ -70,7 +67,6 @@ export default {
     },
   }
 }
-//<ChatVote :socket="socket" :toVoteMessage="toVoteMessage" :toVoteUserID="toVoteUserID" :countDown="countDown"/>
 </script>
 
 <style scoped>

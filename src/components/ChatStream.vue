@@ -36,7 +36,7 @@ export default {
   mounted() {
     this.socket.on("message", (msg) => {
       this.messageList.push({message: msg.text, msgState: msg.isSpecial, UserName: msg.userID})
-      this.updateScroll()
+      updateScroll()
       // display message
     })
   },
@@ -45,19 +45,6 @@ export default {
       // for msgState
       //true == Special, false == normal
       messageList: [
-        {message: "sample message blah blah blah", msgState: true, UserName: "User 1"},
-        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-        {message: "sample message blah blah blah", msgState: true, UserName: "User WTF"},
-        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-        {message: "sample message blah blah blah", msgState: false, UserName: "User 2"},
-        {message: "sample message ", msgState: false, UserName: "User 2"},
-        {message: "sample message ", msgState: false, UserName: "User 2"},
-        {message: "sample message ", msgState: false, UserName: "User 2"},
-        {message: "sample message ", msgState: false, UserName: "User 2"},
-        {message: "sample message ", msgState: false, UserName: "User 2"},
       ]
     }
   }
@@ -68,5 +55,4 @@ function updateScroll(){
   element.scrollTop = element.scrollHeight;
 }
 
-setInterval(updateScroll,1000);
 </script>

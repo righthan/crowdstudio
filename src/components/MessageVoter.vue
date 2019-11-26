@@ -31,16 +31,10 @@ export default {
       }else if(msg && this.toVoteID1) {
         this.toVoteID2 = msg.userID
         this.toVoteMsg2 = msg.text
-        document.getElementById("WaitMessage").hidden = true
-        document.getElementById("VoteMessage1").hidden = false
-        document.getElementById("VoteMessage2").hidden = false
         this.countDown = 10
         this.bar.value = 100
         this.countDownTimer()
       }else if(!msg && this.toVoteID1){
-        document.getElementById("WaitMessage").hidden = true
-        document.getElementById("VoteMessage1").hidden = false
-        document.getElementById("VoteMessage2").hidden = true
         this.countDown = 10
         this.bar.value = 100
         this.countDownTimer()
@@ -76,10 +70,6 @@ export default {
           }, 1000)
       }
       if(this.countDown==0) {
-        document.getElementById("VoteMessage1").hidden = true
-        document.getElementById("VoteMessage2").hidden = true
-        document.getElementById("WaitMessage").hidden = false
-
         // send response
         this.socket.emit("vote response", {userID: this.toVoteID1, isUpvoted: false})
         if(this.toVoteID2 > 1)
