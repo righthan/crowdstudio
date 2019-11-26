@@ -7,7 +7,7 @@
         outlined
         style="height: 120px;"
       >
-        <span>Your message to the streamer is now...</span>
+        <span class="panel_header_sm">Your message to the streamer is now</span>
         <v-divider :inset="inset"/>
         <UserMessageSpecial/>
       </v-card>

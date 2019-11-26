@@ -1,11 +1,12 @@
 <template>
     <v-card
-    class="pa-2 text-center title"
-    tile
-    style="height: 300px;"
+      class="pa-2 text-center"
+      tile
+      style="height: 300px;"
     >
-        Send Message
-        {{ countDown }}
+        <span class="panel_header_lg">
+          Click a message in {{ countDown }}s if you like it. <v-icon color="blue">mdi-thumb-up</v-icon>
+        </span>
 
         <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
         

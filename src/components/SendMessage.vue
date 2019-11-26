@@ -3,7 +3,6 @@
     class="pa-2"
     tile
     outlined
-    style="height: 150px;"
   >
     <span v-html="usrMessage"/>
     <v-textarea
@@ -16,6 +15,7 @@
       outlined
       filled
       :background-color="backgroundColor"
+      hide-details
       color="purple"
       rows="3"
     />

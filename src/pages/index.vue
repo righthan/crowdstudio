@@ -41,6 +41,7 @@ import SendMessage from '../components/SendMessage.vue'
 import ChatStream from '../components/ChatStream.vue'
 import RankMessageSpecial from '../components/RankMessageSpecial.vue'
 import Status from '../components/Status.vue'
+import "@/assets/global.css"
 
 export default {
   name: 'Index',
@@ -57,5 +58,6 @@ export default {
   data: () => ({
     //
   }),
+  
 };
 </script>

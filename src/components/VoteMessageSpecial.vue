@@ -6,7 +6,7 @@
                 <h2 class="purple--text"> {{rank}} </h2>
             </v-col>
 
-            <v-col cols="10">
+            <v-col cols="11">
 
             <v-hover v-slot:default="{ hover }">
                 <v-card color="#F3E5F5">
@@ -34,7 +34,7 @@
                 <h2 class="purple--text"> {{rank}} </h2>
             </v-col>
 
-            <v-col cols="10">
+            <v-col cols="11">
 
                 <v-hover v-slot:default="{ hover }">
                 <v-card color="gray">
