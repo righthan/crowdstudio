@@ -3,10 +3,10 @@
   <v-row>
     <v-col cols="3">
       <div style="color: green; font-weight: bold;">
-        {{user}}:
+        {{user}}
       </div>
     </v-col>
-    <v-col cols="8">
+    <v-col cols="9">
       <div style="color: purple; font-weight: bold;">
         {{message}}
       </div>

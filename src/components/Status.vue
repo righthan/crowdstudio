@@ -1,14 +1,19 @@
 <template>
-    <v-card
-    class="pa-2 text-center title"
-    tile
-    style="height: 300px;"
-    >
-        Message Status
-        <v-divider :inset="inset"></v-divider>
+  <v-row>
+    <v-col>
+      <v-card
+        
+        tile
+        outlined
+        style="height: 120px;"
+      >
+        <span class="panel_header_sm">Your message to the streamer is now</span>
+        <v-divider :inset="inset"/>
         <UserMessageSpecial/>
-    </v-card>
-
+      </v-card>
+    </v-col>
+  </v-row>
+  
 </template>
 
 <script>
@@ -31,3 +36,15 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: .8;
+  position: absolute;
+  width: 100%;
+}
+
+</style>
