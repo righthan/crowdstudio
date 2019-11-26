@@ -1,7 +1,7 @@
 # CrowdStudio
 
 ## Who are we?
-Crowdstudio is a streamer-viewer communication system which delivers messages to the streamer that represent the consensus of opinions between viewers while preserving the context-relevance.
+Crowdstudio is a streamer-viewer communication system which delivers messages to the streamer that represents the consensus of opinions between viewers while preserving the context-relevance.
 
 
 ## System Structure
