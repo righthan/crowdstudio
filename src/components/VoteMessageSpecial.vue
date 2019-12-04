@@ -5,7 +5,7 @@
                 <h2 class="purple--text"> {{rank}} </h2>
             </v-col>
 
-            <v-col cols="11">
+            <v-col cols="10">
 
             <v-hover v-slot:default="{ hover }">
                 <v-card  disabled flat color="#F3E5F5">
@@ -13,6 +13,9 @@
                 </v-card>
             </v-hover>
             
+            </v-col>
+            <v-col cols="1">
+                {{numLiked}}/{{numShown}}
             </v-col>
 
         </v-row>
@@ -23,7 +26,7 @@
                 <h2 class="purple--text"> {{rank}} </h2>
             </v-col>
 
-            <v-col cols="11">
+            <v-col cols="10">
 
                 <v-hover v-slot:default="{ hover }">
                 <v-card color="gray">
@@ -31,6 +34,9 @@
                 </v-card>
             </v-hover>
             
+            </v-col>
+            <v-col cols="1">
+                {{numLiked}}/{{numShown}}
             </v-col>
 
 
@@ -54,6 +60,8 @@ export default {
     message: String,
     msgList: Array,
     rank: Number,
+    numLiked: Number,
+    numShown: Number
   },
   methods: {
   }

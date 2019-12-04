@@ -10,7 +10,7 @@
 
         <v-progress-linear :value="bar.value" color="purple"></v-progress-linear>
         
-        <ChatVote :socket="socket" :toVoteID1="toVoteID1" :toVoteMsg1="toVoteMsg1" :toVoteID2="toVoteID2" :toVoteMsg2="toVoteMsg2"/>
+        <ChatVote :socket="socket" :toVoteID="toVoteID" :toVoteMsg="toVoteMsg" :liked="liked" @likeSwitch="likeSwitch()"/>
     </v-card>
 
 </template>
@@ -25,62 +25,54 @@ export default {
     },
   mounted() {
     this.socket.on("vote message", (msg) => {
-      if(msg && !this.toVoteID1){
-        this.toVoteID1 = msg.userID
-        this.toVoteMsg1 = msg.text
-      }else if(msg && this.toVoteID1) {
-        this.toVoteID2 = msg.userID
-        this.toVoteMsg2 = msg.text
+      if(msg){
+        this.toVoteID = msg.userID
+        this.toVoteMsg = msg.text
         this.countDown = 10
         this.bar.value = 100
-        this.countDownTimer()
-      }else if(!msg && this.toVoteID1){
-        this.countDown = 10
-        this.bar.value = 100
+        this.liked = false
         this.countDownTimer()
       } else {
         setTimeout(() => {
           this.socket.emit("request vote")
-          this.socket.emit("request vote")
-        }, 5000)
+        }, 1000)
       }
     })
     
     setTimeout(() => {
-      this.socket.emit("request vote")
       this.socket.emit("request vote")
     }, 10000)
   },
   data: () =>({
     countDown : 0,
     bar:{value:0},
-    toVoteID1: null,
-    toVoteMsg1: null,
-    toVoteID2: null,
-    toVoteMsg2: null,
+    toVoteID: null,
+    toVoteMsg: null,
+    liked: false
   }),
 
   methods: {
+    likeSwitch() {
+      this.liked = !this.liked
+      console.log(this.liked)
+    },
     countDownTimer: function () {
+      console.log("countdown")
       if(this.countDown > 0) {
           setTimeout(() => {
-              this.countDown -= 1
-              this.bar.value = this.bar.value - 10
+              this.bar.value = this.bar.value - 1
+              if(this.bar.value % 10 == 0)
+                this.countDown = this.bar.value / 10
               this.countDownTimer()
-          }, 1000)
+          }, 100)
       }else if(this.countDown == 0) {
         // send response
-        this.socket.emit("vote response", {userID: this.toVoteID1, isUpvoted: false})
-        if(this.toVoteID2 > 1)
-          this.socket.emit("vote response", {userID: this.toVoteID2, isUpvoted: false})
-        this.toVoteID1 = null
-        this.toVoteMsg1 = null
-        this.toVoteID2 = null
-        this.toVoteMsg2 = null
+        this.socket.emit("vote response", {userID: this.toVoteID, message: this.toVoteMsg, isUpvoted: this.liked})
+        this.toVoteID = null
+        this.toVoteMsg = null
         setTimeout(() => {
           this.socket.emit("request vote")
-          this.socket.emit("request vote")
-        }, 5000)
+        }, 10000)
       }
     },
   }

@@ -2,10 +2,9 @@
 
     <v-row id="chatbot" class="mt-2 mb-2" justify=center align=center style="height:100px">
         
-        <Candidate1 :socket="socket" :toVoteID="toVoteID1" :toVoteMsg="toVoteMsg1"/>
+        <Candidate1 :socket="socket" :toVoteID="toVoteID" :toVoteMsg="toVoteMsg" :liked="liked" @likeSwitch="likeSwitch()"/>
 
-        <Candidate2 :socket="socket" :toVoteID="toVoteID2" :toVoteMsg="toVoteMsg2"/>
-        <div id="WaitMessage" v-if="!toVoteID1 && !toVoteID2">
+        <div id="WaitMessage" v-if="!toVoteID">
           Waiting for message(s)...
         </div>
     </v-row>
@@ -13,17 +12,21 @@
 
 <script>
 import Candidate1 from '../components/Candidate1.vue'
-import Candidate2 from '../components/Candidate2.vue'
 
 export default {
-  components: {Candidate1,Candidate2},
-  props: ["socket", "toVoteID1", "toVoteMsg1", "toVoteID2", "toVoteMsg2"],
+  components: {Candidate1},
+  props: ["socket", "toVoteID", "toVoteMsg", "liked"],
   name:'ChatVote',
   data() {
         return {
           messageDied: false
         }
+    },
+  methods: {
+    likeSwitch() {
+      this.$emit('likeSwitch')
     }
+  }
 }
 </script>
 

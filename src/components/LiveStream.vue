@@ -28,6 +28,48 @@
 </template>
 
 <script>
+
+var voice = ''
+
+// list of languages is probably not loaded, wait for it
+if(window.speechSynthesis.getVoices().length == 0) {
+  window.speechSynthesis.addEventListener('voiceschanged', function() {
+    speechSetup();
+  });
+}
+else {
+  // languages list available, no need to wait
+  speechSetup()
+}
+
+function speechSetup() {
+  // get all voices that browser offers
+  var available_voices = window.speechSynthesis.getVoices();
+
+  // find voice by language locale "en-US"
+  // if not then select the first voice
+  for(var i=0; i<available_voices.length; i++) {
+    if(available_voices[i].lang === 'ko-KR') {
+      voice = available_voices[i];
+      break;
+    }
+  }
+  if(voice === '')
+    voice = available_voices[0];
+}
+
+function textToSpeech(text){
+  // new SpeechSynthesisUtterance object
+  var utter = new SpeechSynthesisUtterance();
+  utter.rate = 0.8;
+  utter.pitch = 0.5;
+  utter.text = text;
+  utter.voice = voice;
+
+  // speak
+  window.speechSynthesis.speak(utter);
+}
+
 export default {
   name: 'LiveStream',
   props: ["socket"],
@@ -38,6 +80,7 @@ export default {
 
     this.socket.on("sound message", (msg) => {
       this.specialMessage = msg.text
+      textToSpeech(msg.text)
       setTimeout(() => {
         this.specialMessage = ""
       }, 10000)

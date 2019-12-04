@@ -12,7 +12,9 @@
         <v-col class="text-center" >
 
           <div v-for="(message, index) in rankList" :item="message" :key="index">
-              <vote-message-special @clickLike="updateLiked" :message="message.text" :rank="index+1"> </vote-message-special>
+              <vote-message-special @clickLike="updateLiked" :message="message.text" :rank="index+1" 
+                                    :numLiked="message.numLiked" :numShown="message.numShown"> 
+              </vote-message-special>
           </div>
 
         </v-col>
@@ -33,7 +35,7 @@ export default {
       let urlParams = new URLSearchParams(window.location.search);
       let userID = urlParams.get('userID');
       this.rankList = list.map((msg) => {
-          return {text: msg.text, liked: msg.shownUsers.includes(userID), score: msg.score}
+          return {text: msg.text, liked: msg.shownUsers.includes(userID), numLiked: msg.likedUsers.length, numShown: msg.shownUsers.length}
       })
     })
   },
