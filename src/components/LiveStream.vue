@@ -5,7 +5,7 @@
     outlined
     style="height: 500px;"
   >
-    <iframe src="https://player.twitch.tv/?channel=tvcrank" frameborder="0" allowfullscreen="false" scrolling="no" height="85%" width="100%"></iframe>
+    <iframe width="424" height="240" src="https://www.youtube.com/embed/6Ry1CsfLBwM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div id="over"> {{specialMessage}} </div>
     <v-divider/>
     <v-row>
