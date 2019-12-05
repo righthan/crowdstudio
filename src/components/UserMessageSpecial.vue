@@ -7,7 +7,7 @@
           Your message was not popular enough...
         </v-col>
         <v-col cols="8" v-else-if="!message && !messageDied && messageChosen" style="color: blue">
-          Your message was chosen and delivered to the streamer!
+          Your message was chosen and is being sent to the streamer!
         </v-col>
         <v-col id="rank" cols="2" hidden>
             <div class="text-center title grey--text">{{message ? message.rank : ""}}</div>
