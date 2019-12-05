@@ -5,7 +5,7 @@
     outlined
     style="height: 500px;"
   >
-    <iframe width="100%" height="85%" src="https://www.youtube.com/embed/dyE4lhqyfOc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="100%" height="85%" src="https://www.youtube.com/embed/7oQ7G7GvfHs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div id="over"> {{specialMessage}} </div>
     <v-divider/>
     <v-row>
@@ -13,7 +13,7 @@
         <h2>
           [카이스트 원탑 효준이가 보여주는 롤토체스] 마! 이게 롤토체스다!!!
         </h2>
-        <a href="https://www.youtube.com/watch?v=hHW1oY26kxQ">카이스트원탑효준</a>
+        카이스트원탑효준
       </v-col>
       <v-col cols="2">
         <span style="float: right;">
