@@ -52,15 +52,17 @@ export default {
       this.isTargetViewer = !this.isTargetViewer
     },
     OnKeypress: function (event) {
-      if (event.key === "Tab" && this.specialMessageAvialable) {
+      if (event.key === "Tab") {
         event.preventDefault()
-        this.switchTargetViewer()
+        if(this.specialMessageAvialable) {
+          this.switchTargetViewer()
+        }
       }
       else if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault()
         setTimeout(() => {
           this.sendMessage()
-        }, 1000)
+        }, 100)
       }
     },
 
