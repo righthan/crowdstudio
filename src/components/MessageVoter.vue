@@ -57,7 +57,6 @@ export default {
       console.log(this.liked)
     },
     countDownTimer: function () {
-      console.log("countdown")
       if(this.countDown > 0) {
           setTimeout(() => {
               this.bar.value = this.bar.value - 1
