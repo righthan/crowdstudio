@@ -79,14 +79,20 @@ export default {
     })
 
     this.socket.on("sound message", (msg) => {
-      setTimeout(() => {
+
+      if(this.userID === "streamer"){
+        textToSpeech(msg.text)
         this.specialMessage = msg.text
         setTimeout(() => {
           this.specialMessage = ""
         }, 10000)
-      }, 10000)
-      if(this.userID === "streamer"){
-        textToSpeech(msg.text)
+      }else{
+        setTimeout(() => {
+          this.specialMessage = msg.text
+          setTimeout(() => {
+            this.specialMessage = ""
+          }, 10000)
+        }, 10000)
       }
     })
   },
