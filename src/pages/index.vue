@@ -9,7 +9,7 @@
           wrap
         >
           <v-col cols="8">
-            <live-stream :socket="socket"/>
+            <live-stream :socket="socket" :userID="userID"/>
             <v-row>
               <v-col cols="6">
                 <rank-message-special :socket="socket"/>
@@ -57,12 +57,13 @@ export default {
   },
   data: () => ({
     //http://ec2-54-180-96-9.ap-northeast-2.compute.amazonaws.com:3000
-    socket: io('http://ec2-54-180-96-9.ap-northeast-2.compute.amazonaws.com:3000')
+    socket: io('http://ec2-54-180-96-9.ap-northeast-2.compute.amazonaws.com:3000'),
+    userID: null
   }),
   mounted() {
     let urlParams = new URLSearchParams(window.location.search);
-    let userID = urlParams.get('userID');
-    this.socket.emit("register", userID);
+    this.userID = urlParams.get('userID');
+    this.socket.emit("register", this.userID);
   },
 };
 </script>

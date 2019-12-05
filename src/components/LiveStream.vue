@@ -72,18 +72,22 @@ function textToSpeech(text){
 
 export default {
   name: 'LiveStream',
-  props: ["socket"],
+  props: ["socket", "userID"],
   mounted() {
     this.socket.on("view count update", count => {
       this.view_count = count
     })
 
     this.socket.on("sound message", (msg) => {
-      this.specialMessage = msg.text
-      textToSpeech(msg.text)
       setTimeout(() => {
-        this.specialMessage = ""
+        this.specialMessage = msg.text
+        setTimeout(() => {
+          this.specialMessage = ""
+        }, 10000)
       }, 10000)
+      if(this.userID === "streamer"){
+        textToSpeech(msg.text)
+      }
     })
   },
   data: function () {
