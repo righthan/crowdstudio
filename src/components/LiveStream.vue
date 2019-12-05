@@ -5,17 +5,17 @@
     outlined
     style="height: 500px;"
   >
-    <iframe width="100%" height="85%" src="https://www.youtube.com/embed/6Ry1CsfLBwM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="100%" height="85%" src="https://www.youtube.com/embed/hHW1oY26kxQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div id="over"> {{specialMessage}} </div>
     <v-divider/>
     <v-row>
-      <v-col cols="6" align-self="start" class = "video_info">
+      <v-col cols="10" align-self="start" class = "video_info">
         <h2>
-          We are the crowdstudio!
+          [카이스트 원탑 효준이가 보여주는 롤토체스] 마! 이게 롤토체스다!!!
         </h2>
-        <a href="https://youtube.com">Yollllo</a>
+        <a href="https://www.youtube.com/watch?v=hHW1oY26kxQ">카이스트원탑효준</a>
       </v-col>
-      <v-col cols="6">
+      <v-col cols="2">
         <span style="float: right;">
           <v-icon>
             mdi-account
