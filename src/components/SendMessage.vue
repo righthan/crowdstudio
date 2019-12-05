@@ -9,7 +9,7 @@
       v-model="message"
       append-outer-icon='mdi-send'
       @click:append-outer="sendMessage"
-      @keydown="OnKeydown"
+      @keydown="OnKeypress"
       autofocus
       label="Shift+Enter will add a new line"
       outlined
@@ -33,6 +33,7 @@ export default {
     return {
       isTargetViewer: true,
       usrMessage: "> All viewers (Press <strong>tab</strong> to send to streamer)",
+      specialMessageAvialable: true,
       backgroundColor: 'grey lighten-2',
       message: '',
     }
@@ -50,21 +51,34 @@ export default {
       }
       this.isTargetViewer = !this.isTargetViewer
     },
-    OnKeydown: function (event) {
-      if (event.key === "Tab") {
+    OnKeypress: function (event) {
+      if (event.key === "Tab" && this.specialMessageAvialable) {
         event.preventDefault()
         this.switchTargetViewer()
       }
       else if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault()
-        this.sendMessage()
+        setTimeout(() => {
+          this.sendMessage()
+        }, 1000)
       }
     },
 
     sendMessage: function () {
-      this.socket.emit("message", {text: this.message, isSpecial: !this.isTargetViewer})
-      this.message = ''
+      if (this.message.length >= 1) {
+        this.socket.emit("message", {text: this.message, isSpecial: !this.isTargetViewer})
+        this.message = ''
+        this.isTargetViewer = true
+        this.usrMessage = "> All viewers (Press <strong>tab</strong> to send to streamer)"
+        this.backgroundColor = 'grey lighten-2'
+      }
     },
+  },
+
+  mounted() {
+    this.socket.on("msg status update", (msg) => {
+      this.specialMessageAvialable = (msg === null)
+    })
   }
 }
 </script>
