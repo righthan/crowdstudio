@@ -5,7 +5,7 @@
     outlined
     style="height: 500px;"
   >
-    <iframe width="100%" height="85%" src="https://www.youtube.com/embed/6Ry1CsfLBwM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="100%" height="85%" src="https://www.youtube.com/embed/dyE4lhqyfOc" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <div id="over"> {{specialMessage}} </div>
     <v-divider/>
     <v-row>
