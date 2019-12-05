@@ -15,7 +15,6 @@
       outlined
       filled
       :background-color="backgroundColor"
-      :rules="rules"
       hide-details
       color="purple"
       rows="3"
@@ -32,7 +31,6 @@ export default {
   props: ["socket"],
   data: function () {
     return {
-      rules: [v => v.length >= 1 || 'At least 1 character'],
       isTargetViewer: true,
       usrMessage: "> All viewers (Press <strong>tab</strong> to send to streamer)",
       specialMessageAvialable: true,
